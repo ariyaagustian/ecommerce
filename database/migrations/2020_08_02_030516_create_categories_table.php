@@ -11,10 +11,21 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
+    //METHOD INI DIGUNAKAN KETIKA MIGRATE DIJALANKAN
     public function up()
     {
+        //JADI KETIKA MIGRATE DIJALANKAN, KITA AKAN MEMBUAT TABLE BERNAMA categories
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            //ADAPUN FIELDNYA ADALAH MASING-MASING DIBAWAH INI
+            $table->bigIncrements('id');
+            $table->string('name'); //STRING SAMA DENGAN VARCHAR
+
+            //JADI KITA AKAN MEMBUAT CATEGORI INI MEMILIKI ANAK KATEGORI
+            //SEHINGGA DIBUAT STRUKTUR DIMANA KATEGORI YANG MEMILIKI parent_id
+            //ADALAH KATEGORI ANAK, SEBALIKNYA JIKA KATEGORI ITU parent_id NYA NULL
+            //MAKA DIA ADALAH KATEGORI INDUK
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -24,8 +35,10 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
+    //SEDANGKAN METHOD INI DIGUNAKAN KETIKA ROLLBACK ATAU REFRESH DATABASE DIJALANKAN
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('categories'); //BAGIAN INI KITA AKAN MENGHAPUS DATABASE DIATAS
+        //INGAT FUNGSI INI HANYA AKAN BERJALAN KETIKA KITA MENJALANKAN FUNGSI ROLLBACK ATAU YANG SEJENISNYA
     }
 }

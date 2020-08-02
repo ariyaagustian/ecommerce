@@ -13,8 +13,13 @@ class CreateDistrictsTable extends Migration
      */
     public function up()
     {
+        //BUAT TABLE districts
         Schema::create('districts', function (Blueprint $table) {
-            $table->id();
+            //DENGAN FIELD DIBAWAH INI
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('province_id'); //FIELD INI AKAN MERUJUK KE TABLE PROVINCES
+            $table->unsignedBigInteger('city_id'); // FIELD INI AKAN MERUJUK KE TABLE CITIES
+            $table->string('name');
             $table->timestamps();
         });
     }

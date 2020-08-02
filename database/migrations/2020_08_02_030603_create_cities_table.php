@@ -13,8 +13,14 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
+        //BUAT TABLE cities
         Schema::create('cities', function (Blueprint $table) {
-            $table->id();
+            //DENGAN FIELD DIBAWAH INI
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('province_id'); //FIELD INI AKAN MERUJUK KE TABLE provinces
+            $table->string('name');
+            $table->string('type');
+            $table->string('postal_code');
             $table->timestamps();
         });
     }

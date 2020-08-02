@@ -13,8 +13,20 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+        //JADI KITA AKAN MEMBUAT TABLE products
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            //DENGAN FIELD DIBAWAH INI
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('slug');
+
+            //ADAPUN category_id NYA NNTI AKAN MERUJUK KE TABLE categories
+            //DIMANA UNTUK SAAT INI BELUM AKAN DIBAHAS RELASI ANTAR TABLE-NYA
+            $table->unsignedBigInteger('category_id');
+            $table->text('description')->nullable();
+            $table->string('image');
+            $table->integer('price');
+            $table->integer('weight');
             $table->timestamps();
         });
     }

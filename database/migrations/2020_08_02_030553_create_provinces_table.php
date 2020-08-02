@@ -13,8 +13,11 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
+      //BUAT TABLE provinces
         Schema::create('provinces', function (Blueprint $table) {
-            $table->id();
+            //YANG AKAN BERISI LIST DATA NAMA PROPINSI
+            $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
